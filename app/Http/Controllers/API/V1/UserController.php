@@ -19,7 +19,7 @@ class UserController extends Controller
         $user = new User();
         $user->name = $request->get('name');
         $user->email = $request->get('email');
-        $user->password = bcrypt($request->get('password')); // ハッシュ化するためのヘルパー
+        $user->password = bcrypt($request->get('password')); // ハッシュ化するためのヘルパーがbcrypt
 
         $user->save();
 

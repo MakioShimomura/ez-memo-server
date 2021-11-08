@@ -23,7 +23,19 @@ Route::prefix('v1')->namespace('App\Http\Controllers\API\V1')->group(function ()
         Route::post('register', 'UserController@register');
     });
 
-    Route::middleware('auth:api')->get('test', function () {
-        return '認証済み';
+    Route::prefix('memos')->group(function () {
+        Route::get('/', 'MemoController@view');
+        Route::post('/', 'MemoController@store');
+        Route::patch('/{id}', 'MemoController@update');
+        Route::delete('/{id}', 'MemoController@delete');
+    });
+
+    Route::prefix('user')->middleware('auth:api')->group(function () {
+        Route::prefix('memos')->group(function () {
+            Route::get('/', 'MemoController@view');
+            Route::post('/', 'MemoController@store');
+            Route::patch('/{id}', 'MemoController@update');
+            Route::delete('/{id}', 'MemoController@delete');
+        });
     });
 });
