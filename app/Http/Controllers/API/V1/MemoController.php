@@ -62,7 +62,8 @@ class MemoController extends Controller
     {
         $memo = $this->memoRepository->create($request);
 
-        dd($memo);
+        dd($memo, Crypt::encryptString($memo->id));
+        // dd($memo);
 
         return response()->json([
             'id' => $uuid,
